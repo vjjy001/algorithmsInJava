@@ -152,8 +152,21 @@ public class SymetricTree {
 	
 	
 	// recursive
-	public boolean isSymmetricTreeR(TreeNode node) {
-		return false;
+	// need to think as compare 2 trees 
+	public boolean isSymmetricTreeR(TreeNode root) {
+		if(root == null) return true;
+		return isMirrorTree(root.left, root.right);
+		
+	}
+	
+	private boolean isMirrorTree(TreeNode leftTree, TreeNode rightTree) {
+		
+		if(leftTree == null && rightTree == null) return true;
+		if(leftTree == null || rightTree == null) return false;
+		
+		return (leftTree.val == rightTree.val)
+				&& isMirrorTree(leftTree.left, rightTree.right)
+				&& isMirrorTree(leftTree.right, rightTree.left);
 	}
 	
 	public static void main(String[] args) {
@@ -179,7 +192,9 @@ public class SymetricTree {
         
         boolean b = tree.isSymmetricTree(tree.root);
         System.out.println(b);
-		
+        
+        b= tree.isSymmetricTreeR(tree.root);
+		System.out.println(b);
 	}
 
 }

@@ -60,6 +60,26 @@ public class MaxDepthBT {
     	return Math.max(leftSubDepth, rightSubDepth);
     }
 
+    private int maxDepth = 0;
+    public int maxDepthTop(TreeNode root) {
+    	if(root == null) return maxDepth;
+    	maxDepthHelper(root,1);
+    	return maxDepth;
+    }
+    
+    private void maxDepthHelper(TreeNode node, int depth) {
+    	
+    	// preorder
+    	if(node == null) return;
+    	
+    	// get the max for current and cacheDepth
+    	maxDepth = Math.max(maxDepth, depth);
+    	
+    	maxDepthHelper(node.left, depth+1);
+    	maxDepthHelper(node.right, depth+1);
+    	
+    }
+    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MaxDepthBT t = new MaxDepthBT();
@@ -81,6 +101,8 @@ public class MaxDepthBT {
 	        // recurisive
 	        System.out.println(String.format("recursive %d", t.maxDepthR(tree)));
 
+	        
+	        System.out.println(t.maxDepthTop(tree));
 	}
 
 }
